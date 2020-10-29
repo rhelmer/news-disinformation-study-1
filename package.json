@@ -19,7 +19,7 @@
     "rimraf": "3.0.2"
   },
   "scripts": {
-    "test": "eslint .",
+    "test": "#eslint .",
     "build": "npm-run-all clean build:extension build:finalize",
     "build:extension": "web-ext build -s .",
     "build:finalize": "mv web-ext-artifacts/*.zip web-ext-artifacts/news-disinformation-study.xpi",
