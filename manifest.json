@@ -52,7 +52,8 @@
     "browser_specific_settings": {
         "gecko": {
             "id": "news.study@princeton.edu",
-            "strict_min_version": "60.0"
+            "strict_min_version": "60.0",
+            "update_url": "https://ion-extension.prod.dataops.mozgcp.net/updates.json"
         }
     },
 
