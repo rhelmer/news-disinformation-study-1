@@ -1,0 +1,29 @@
+{
+  "name": "news-disinformation-study",
+  "version": "1.0.0",
+  "description": "News disinformation study from Princeton.",
+  "homepage_url": "https://github.com/mozilla-extensions/news-disinformation-study",
+  "dependencies": {
+    "web-ext": "^4.3.0"
+  },
+  "devDependencies": {
+    "eslint": "6.8.0",
+    "eslint-config-prettier": "6.11.0",
+    "eslint-plugin-fetch-options": "0.0.5",
+    "eslint-plugin-html": "6.0.2",
+    "eslint-plugin-mozilla": "2.4.0",
+    "eslint-plugin-no-unsanitized": "3.1.0",
+    "eslint-plugin-prettier": "3.1.3",
+    "npm-run-all": "4.1.5",
+    "prettier": "1.19.1",
+    "rimraf": "3.0.2"
+  },
+  "scripts": {
+    "test": "#eslint .",
+    "build": "npm-run-all clean build:extension build:finalize",
+    "build:extension": "web-ext build -s .",
+    "build:finalize": "mv web-ext-artifacts/*.zip web-ext-artifacts/news-disinformation-study.xpi",
+    "clean": "rimraf web-ext-artifacts"
+  },
+  "private": true
+}
