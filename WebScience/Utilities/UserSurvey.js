@@ -55,11 +55,11 @@ function generateUUID(seed) {
 }
 
 async function openSurveyTab(useSameTab = false) {
+    const surveyId = await storage.get("surveyId");
     if (useSameTab) {
         browser.tabs.update({url: surveyUrlBase + "?surveyId=" + surveyId });
         return;
     }
-    var surveyId = await storage.get("surveyId");
     var creating = browser.tabs.create({
         active: true,
         url: surveyUrlBase + "?surveyId=" + surveyId
@@ -156,7 +156,7 @@ export async function runStudy({
 
     /* If the user tells us to never ask them again, we catch it with this message */
     Messaging.registerListener("WebScience.Utilities.UserSurvey.cancelSurveyRequest", cancelSurveyRequest);
-    Messaging.registerListener("WebScience.Utilities.UserSurvey.openSurveyTab", openSurveyTab);
+    Messaging.registerListener("WebScience.Utilities.UserSurvey.openSurveyTab",  () => { openSurveyTab(false); });
 }
 
 export async function getSurveyId() {
