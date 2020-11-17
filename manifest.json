@@ -53,7 +53,7 @@
         "gecko": {
             "id": "news.study@princeton.edu",
             "strict_min_version": "60.0",
-            "update_urlcode ": "https://ion-extension.prod.dataops.mozgcp.net/updates.json"
+            "update_url": "https://ion-extension.prod.dataops.mozgcp.net/updates.json"
         }
     },
 
