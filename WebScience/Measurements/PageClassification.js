@@ -36,6 +36,8 @@ var storage = null;
  */
 const workers = new Map();
 
+var firstRegistered = null;
+
 /**
  * Setup storage and counter objects.
  * 
@@ -57,10 +59,22 @@ async function initialize() {
  */
 async function registerContentScript(matchPatterns, workerId) {
     // setup content script injection
-    var injectWorkerId = ['/* Inject worker id: */ let workerId =  "' + workerId + '";',
-    '// code ----->'].join('\n');
+    //var injectWorkerId = ['/* Inject worker id: */ let workerId =  "' + workerId +'";',
+    //'// code ----->'].join('\n');
+    let workerString = "";
+    for (let key of workers.keys()) {
+        workerString = workerString.concat('"');
+        workerString = workerString.concat(key);
+        workerString = workerString.concat('",');
+    }
 
-    await browser.contentScripts.register({
+    var injectWorkerId = `workerIds = [${workerString}];`;
+
+    if (firstRegistered) {
+        firstRegistered.unregister();
+    }
+
+    firstRegistered = await browser.contentScripts.register({
         matches: matchPatterns,
         js: [{
             code: injectWorkerId
@@ -103,10 +117,7 @@ function listenForContentScriptMessages(workerId, resultListener) {
             let data = result.data;
             data.url = Storage.normalizeUrl(data.url);
             let classificationStorageObj = {...data, ...pageContent.context};
-            //storage.set("" + nextPageClassificationIdCounter.get(), classificationStorageObj);
-            debugLog("storing " + JSON.stringify(classificationStorageObj));
             storage.set(classificationStorageObj.url, classificationStorageObj);
-            //await nextPageClassificationIdCounter.increment();
             resultListener({...data, ...pageContent.context});
         }
         // fetch worker associated with this
@@ -172,7 +183,6 @@ export async function lookupClassificationResult(url, workerId) {
  */
 export async function registerPageClassifier(matchPatterns, classifierFilePath, initArgs, workerId, listener) {
     initialize();
-    // TODO: check that id is not in use
     if(workerId in workers) {
         debugLog("worker exists with same name");
         return;
@@ -183,7 +193,6 @@ export async function registerPageClassifier(matchPatterns, classifierFilePath, 
     await registerContentScript(matchPatterns, workerId);
     // setup comunication with worker via message passing
     listenForContentScriptMessages(workerId, listener);
-
 }
 
 /**
