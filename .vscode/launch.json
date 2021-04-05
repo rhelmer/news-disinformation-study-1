@@ -1,0 +1,88 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Build Study",
+            "type": "node",
+            "request": "launch",
+            "runtimeArgs": [
+                "run-script",
+                "build"
+            ],
+            "runtimeExecutable": "npm"
+        },
+
+        {
+            "name": "Build Study (Developer Mode)",
+            "type": "node",
+            "request": "launch",
+            "runtimeArgs": [
+                "run-script",
+                "dev"
+            ],
+            "runtimeExecutable": "npm"
+        },
+
+        // Note: automatic extension reloading is not reliable... after the first reload, the debugger appears
+        // to remain connected, but the Visual Studio debug console disconnects and the Firefox debug console
+        // shows errors
+        {
+            "name": "Launch Study (Automatic Reloading)",
+            "type": "firefox",
+            // To use the privileged API, you'll need to run a developer version of Firefox.
+            //   Set the environment variable FFDEVLOC to the folder containing a dev version,
+            //   and then uncomment the line below. If you don't set firefoxExecutable,
+            //   but do have the developer version installed such that VS Code can  find it,
+            //   it should use it automatically.
+            //"firefoxExecutable": "${env:FFDEVLOC}",
+            "request": "launch",
+            "reAttach": false,
+            "reloadOnChange": {
+                "watch": [ "${workspaceFolder}/**/*.js", "${workspaceFolder}/**/*.json", "${workspaceFolder}/**/*.html" ],
+                "ignore": [ ],
+                "debounce": false
+            },
+            "popupAutohideButton": false,
+            "addonPath": "${workspaceFolder}",
+            "firefoxArgs": [ "-jsconsole", "-foreground" ],
+            "preferences": {
+                "devtools.browserconsole.contentMessages": true,
+                "devtools.browserconsole.filter.debug": true,
+                "devtools.browserconsole.filter.error": false,
+                "devtools.browserconsole.filter.info": false,
+                "devtools.browserconsole.filter.log": false,
+                "devtools.browserconsole.filter.warn": false,
+                "app.normandy.enabled": false,
+                "extensions.allowPrivateBrowsingByDefault": true,
+                "extensions.experiments.enabled": true
+            }
+        },
+        // Note: it's possible to manually reload the extension inside Firefox from about:debugging
+        {
+            "name": "Launch Study",
+            "type": "firefox",
+            // To use the privileged API, you'll need to run a developer version of Firefox.
+            //   Set the environment variable FFDEVLOC to the folder containing a dev version,
+            //   and then uncomment the line below. If you don't set firefoxExecutable,
+            //   but do have the developer version installed such that VS Code can  find it,
+            //   it should use it automatically.
+            //"firefoxExecutable": "${env:FFDEVLOC}",
+            "request": "launch",
+            "reAttach": false,
+            "popupAutohideButton": false,
+            "addonPath": "${workspaceFolder}",
+            "firefoxArgs": [  "-jsconsole", "-foreground", "-new-window", "about:blank", "-url", "about:debugging#/runtime/this-firefox" ],
+            "preferences": {
+                "devtools.browserconsole.contentMessages": true,
+                "devtools.browserconsole.filter.debug": true,
+                "devtools.browserconsole.filter.error": false,
+                "devtools.browserconsole.filter.info": false,
+                "devtools.browserconsole.filter.log": false,
+                "devtools.browserconsole.filter.warn": false,
+                "app.normandy.enabled": false,
+                "extensions.allowPrivateBrowsingByDefault": true,
+                "extensions.experiments.enabled": true
+            }
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+// Visual Studio Code autocomplete and type checking
+// configuration for JavaScript in the project
+{
+    "compilerOptions": {
+        "module": "es6",
+        "target": "es2019"
+    },
+    "checkJs": true,
+    "baseUrl": "."
+}
