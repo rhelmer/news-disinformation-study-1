@@ -4,7 +4,7 @@ const version = "1.2"; // sync with manifest
 WebScience.Utilities.Debugging.enableDebugging();
 const debugLog = WebScience.Utilities.Debugging.getDebuggingLog("study");
 
-const STUDY_END_NOTICE_URL = "https://example.com";
+const STUDY_END_NOTICE_URL = "https://rally.mozilla.org/past-studies/political-and-covid-19-news-ion-ending/";
 
 async function runStudy() {
     debugLog("Beginning study");
