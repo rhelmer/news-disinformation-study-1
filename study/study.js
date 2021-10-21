@@ -4,6 +4,8 @@ const version = "1.2"; // sync with manifest
 WebScience.Utilities.Debugging.enableDebugging();
 const debugLog = WebScience.Utilities.Debugging.getDebuggingLog("study");
 
+const STUDY_END_NOTICE_URL = "https://example.com";
+
 async function runStudy() {
     debugLog("Beginning study");
 
@@ -62,6 +64,23 @@ async function runStudy() {
     WebScience.Utilities.UserSurvey.runStudy({
         surveyUrl: "https://citpsurveys.cs.princeton.edu/polInfoSurvey"
     });
-    
+
 }
-WebScience.Utilities.Consent.runStudy(runStudy);
+
+// Study has ended.
+
+// Stop data collection.
+// WebScience.Utilities.Consent.runStudy(runStudy);
+
+// Send one-time notification of study ending.
+try {
+    const result = await browser.storage.local.get("endNoticeServed");
+    if (!("endNoticeServed" in result) || result["endNoticeServed"] === false) {
+        await browser.tabs.create({ url: STUDY_END_NOTICE_URL});
+        await browser.storage.local.set({ endNoticeServed: true });
+    } else {
+        console.debug("Not serving ending notice, already served:", result);
+    }
+} catch (err) {
+    console.error("Unable to open tab, re-try next startup:", err);
+}
