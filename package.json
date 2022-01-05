@@ -1,6 +1,6 @@
 {
   "name": "news-disinformation-study",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "News disinformation study from Princeton.",
   "homepage_url": "https://github.com/mozilla-extensions/news-disinformation-study",
   "dependencies": {
