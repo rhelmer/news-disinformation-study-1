@@ -18,7 +18,7 @@
     "@mozilla/readability": "^0.4.1"
   },
   "devDependencies": {
-    "@mozilla/rally": "0.6.0",
+    "@mozilla/rally": "0.7.1",
     "@mozilla/web-science": "^0.4.0",
     "@rollup/plugin-commonjs": "^14.0.0",
     "@rollup/plugin-node-resolve": "^10.0.0",
