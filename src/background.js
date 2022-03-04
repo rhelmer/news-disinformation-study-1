@@ -1,6 +1,4 @@
 import "webextension-polyfill";
-import { Rally } from "@mozilla/rally";
-import * as EventHandling from "./EventHandling.js"
 
 async function runStudy() {
     await browser.management.uninstallSelf(
