@@ -17,6 +17,11 @@ jobs:
       - run:
           name: Run linting
           command: npm run lint
+      - run:
+          name: Package
+          command: npm run package
+      - store_artifacts:
+          path: ./web-ext-artifacts
 
   Firefox integration tests:
     docker:
@@ -34,5 +39,5 @@ workflows:
   version: 2
   ci:
     jobs:
-      - Linting
+      - Build, Lint and Package
       - Firefox integration tests
