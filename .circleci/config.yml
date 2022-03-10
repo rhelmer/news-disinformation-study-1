@@ -3,7 +3,7 @@
 version: 2.1
 
 jobs:
-  Linting:
+  Build Lint and Package:
     docker:
       - image: cimg/node:14.13.1
     steps:
@@ -39,5 +39,5 @@ workflows:
   version: 2
   ci:
     jobs:
-      - Build, Lint and Package
+      - Build Lint and Package
       - Firefox integration tests
