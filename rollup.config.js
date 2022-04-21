@@ -37,7 +37,6 @@ export default (cliArgs) => {
           // Add-on.
           __ENABLE_DEVELOPER_MODE__: isDevMode(cliArgs),
         }),
-        webScienceRollupPlugin(),
         resolve({
           browser: true,
         }),
