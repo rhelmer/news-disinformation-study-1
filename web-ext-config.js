@@ -49,5 +49,10 @@ module.exports = {
     "updatedSchema.schema.json",
     "jsdoc-conf.json",
     "jsconfig.json",
+    "README.md",
+    "schemasDocumentation.md",
+    "jscnfig.json",
+    "jsdoc-conf.json",
+    "newsDisinfoQA.md"
   ],
 };
